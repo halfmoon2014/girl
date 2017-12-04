@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration("classpath:sql.xml")
+@ContextConfiguration()
 public class AppTests {
     private MockMvc mockMvc;
     //测试接口
