@@ -49,7 +49,7 @@ public class GirlController {
      */
     @GetMapping(value = "/girls/{id}")
     public Girl girlFindOne(@PathVariable("id") Integer id){
-        return  girlRepository.getOne(id);
+        return   girlRepository.findOne(id);
     }
     //更新
     @PutMapping(value = "/girls/{id}")

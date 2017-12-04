@@ -19,6 +19,7 @@ public class Girl {
 
     @Min(value = 18,message = "未成年少女不得入内")
     private Integer age;
+
     @NotNull (message = "金额必传")
     private Double money;
 
@@ -63,6 +64,7 @@ public class Girl {
                 "id=" + id +
                 ", cupSize='" + cupSize + '\'' +
                 ", age=" + age +
+                ", money=" +money +
                 '}';
     }
 }
