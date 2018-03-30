@@ -2,6 +2,7 @@ package gril.demo.controller;
 
 import gril.demo.domain.Result;
 import gril.demo.service.GirlService;
+import gril.demo.service.NotificacionesJpaController;
 import gril.demo.domain.Girl;
 import gril.demo.repository.GirlRepository;
 import gril.demo.utils.ResultUtil;
@@ -11,7 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+
+
 import javax.validation.Valid;
+
+import java.util.ArrayList;
 import java.util.List;
 @RestController
 public class GirlController {
@@ -20,6 +25,7 @@ public class GirlController {
     private GirlRepository girlRepository;
     @Autowired
     private GirlService girlService;
+
     /**
      * 获取所有女生
      * @return
@@ -83,4 +89,6 @@ public class GirlController {
     public  void getAge(@PathVariable("id") Integer id) throws Exception {
         girlService.getAge(id);
     }
+    
+
 }
