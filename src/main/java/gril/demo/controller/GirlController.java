@@ -2,7 +2,7 @@ package gril.demo.controller;
 
 import gril.demo.domain.Result;
 import gril.demo.service.GirlService;
-import gril.demo.service.NotificacionesJpaController;
+import gril.demo.domain.Friend;
 import gril.demo.domain.Girl;
 import gril.demo.repository.GirlRepository;
 import gril.demo.utils.ResultUtil;
@@ -12,13 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-
-
 import javax.validation.Valid;
 
-import java.util.ArrayList;
 import java.util.List;
 @RestController
+@RequestMapping("/school")
 public class GirlController {
     private  final static Logger logger= LoggerFactory.getLogger(GirlController.class);
     @Autowired
@@ -57,15 +55,18 @@ public class GirlController {
     public Girl girlFindOne(@PathVariable("id") Integer id){
         return   girlRepository.findOne(id);
     }
-    //更新
+    //更新    
     @PutMapping(value = "/girls/{id}")
     public Girl girlUpdata(@PathVariable("id") Integer id,
                            @RequestParam("cupSize") String cupSize,
-                           @RequestParam("age") Integer age  ){
+                           @RequestParam("age") Integer age,
+                           @RequestParam("money") Double money
+                           ){
         Girl girl = new Girl();
         girl.setId(id);
         girl.setAge(age );
-        girl.setCupSize(cupSize);
+        girl.setCupSize(cupSize);     
+        girl.setMoney(money);
         return girlRepository.save(girl);
 
     }
@@ -85,10 +86,18 @@ public class GirlController {
       girlService.insertTwo();
     }
 
-    @GetMapping(value = "/girls/getAge/{id}")
-    public  void getAge(@PathVariable("id") Integer id) throws Exception {
-        girlService.getAge(id);
+    @GetMapping(value = "/girls/{id}/age")
+    public  int girlAge(@PathVariable("id") Integer id) throws Exception {
+        return girlService.getAge(id);
     }
     
-
+    @GetMapping(value = "/girls/{id}/friends")
+    public  List<Friend> girlFriends(@PathVariable("id") Integer id) throws Exception {
+        return girlService.girlFriends(id);
+    }    
+    @PostMapping(value = "/head")
+    public Result girlHead(@RequestHeader("Ver") Double Ver,  
+            @RequestHeader("UserData") String UserData){        
+        return ResultUtil.success("Ver:"+Ver.toString()+",UserData:"+UserData);
+    }
 }
